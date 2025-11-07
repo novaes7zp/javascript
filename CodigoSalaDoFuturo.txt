@@ -1,0 +1,31 @@
+function clicarRadiosAleatoriamente() {
+  const radios = document.querySelectorAll('input[type="radio"]');
+  const radiosArray = Array.from(radios);
+  let i = 0;
+
+  function clicarProximo() {
+    if (i >= radiosArray.length) {
+      console.log("✅ Todos os inputs foram processados!");
+      return;
+    }
+
+    const name = radiosArray[i].name;
+    const grupo = radiosArray.filter(r => r.name === name);
+    const randomRadio = grupo[Math.floor(Math.random() * grupo.length)];
+    randomRadio.click();
+
+    window.scrollBy({
+      top: 150,
+      behavior: "smooth"
+    });
+
+    i += grupo.length;
+
+    const delay = 500 + Math.random() * 1000;
+    setTimeout(clicarProximo, delay);
+  }
+
+  clicarProximo();
+}
+
+clicarRadiosAleatoriamente();
